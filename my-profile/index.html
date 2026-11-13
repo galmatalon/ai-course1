@@ -1,0 +1,653 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style>
+<title>גל מטלון</title>
+<meta name="description" content="גל מטלון — מנהל QA ומומחה אוטומציה, 20+ שנות ניסיון, מייסד המכללה לאוטומציה">
+<style>
+  :root{
+    --bg:#eef3f6;
+    --surface:#ffffff;
+    --surface-alt:#e3ecf1;
+    --ink:#16232f;
+    --ink-soft:#48586a;
+    --ink-faint:#7c8a99;
+    --navy:#1d3a54;
+    --navy-deep:#12283c;
+    --navy-tint:#e6edf3;
+    --green:#5c9a2e;
+    --green-deep:#3f7020;
+    --green-tint:#eaf3e0;
+    --border:rgba(22,35,47,.12);
+    --border-strong:rgba(22,35,47,.22);
+    --shadow:0 18px 40px -22px rgba(18,40,60,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --bg:#0d1720;
+      --surface:#142230;
+      --surface-alt:#1a2b3b;
+      --ink:#edf3f7;
+      --ink-soft:#aebbc7;
+      --ink-faint:#7f8fa0;
+      --navy:#6fa0c4;
+      --navy-deep:#9dc2e0;
+      --navy-tint:#1c3448;
+      --green:#8fce54;
+      --green-deep:#a9e075;
+      --green-tint:#1f3018;
+      --border:rgba(237,243,247,.14);
+      --border-strong:rgba(237,243,247,.26);
+      --shadow:0 18px 40px -20px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#0d1720;
+    --surface:#142230;
+    --surface-alt:#1a2b3b;
+    --ink:#edf3f7;
+    --ink-soft:#aebbc7;
+    --ink-faint:#7f8fa0;
+    --navy:#6fa0c4;
+    --navy-deep:#9dc2e0;
+    --navy-tint:#1c3448;
+    --green:#8fce54;
+    --green-deep:#a9e075;
+    --green-tint:#1f3018;
+    --border:rgba(237,243,247,.14);
+    --border-strong:rgba(237,243,247,.26);
+    --shadow:0 18px 40px -20px rgba(0,0,0,.55);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation-duration:.001ms !important; transition-duration:.001ms !important} }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Heebo","Segoe UI",Arial,sans-serif;
+    font-size:16px;
+    line-height:1.65;
+  }
+  h1,h2,h3,.disp{
+    font-family:"IBM Plex Sans Hebrew","Heebo",Arial,sans-serif;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{
+    font-family:"IBM Plex Mono","Consolas",monospace;
+    direction:ltr;
+    unicode-bidi:isolate;
+  }
+  a{color:inherit}
+  img{display:block}
+
+  .wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(20px,4vw,48px)}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;letter-spacing:.01em}
+  .brand-mark{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(155deg,var(--navy),var(--navy-deep));
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.85rem;
+    box-shadow:var(--shadow);
+    flex:none;
+  }
+  nav.links{display:flex;gap:26px;font-size:.92rem;color:var(--ink-soft)}
+  nav.links a{text-decoration:none;position:relative;padding-block:4px}
+  nav.links a:hover,nav.links a:focus-visible{color:var(--ink)}
+  nav.links a::after{
+    content:"";position:absolute;inset-inline:0;bottom:-2px;height:2px;
+    background:var(--green);transform:scaleX(0);transform-origin:center;
+    transition:transform .2s ease;
+  }
+  nav.links a:hover::after,nav.links a:focus-visible::after{transform:scaleX(1)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--green);color:#0f1a08;font-weight:700;font-size:.88rem;
+    padding:9px 18px;border-radius:999px;text-decoration:none;white-space:nowrap;
+    transition:filter .15s ease;
+  }
+  .nav-cta:hover{filter:brightness(1.08)}
+  @media (max-width:760px){ nav.links{display:none} }
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:clamp(40px,7vw,76px) clamp(48px,6vw,72px)}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(32px,5vw,64px);align-items:center}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr} }
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.14em;
+    color:var(--green-deep);text-transform:uppercase;font-weight:600;
+    background:var(--green-tint);border:1px solid color-mix(in srgb, var(--green) 35%, transparent);
+    padding:6px 14px;border-radius:999px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:"✓";font-weight:700}
+
+  .hero h1{font-size:clamp(2.4rem,5.4vw,3.6rem);font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .hero .role{
+    margin-top:10px;font-size:clamp(1.05rem,2vw,1.25rem);color:var(--navy);
+    font-weight:600;
+  }
+  .hero .role .sep{color:var(--ink-faint);margin-inline:8px;font-weight:400}
+  .hero p.lede{margin-top:20px;max-width:56ch;color:var(--ink-soft);font-size:1.05rem}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    font-weight:700;font-size:.95rem;padding:12px 22px;border-radius:12px;
+    border:1px solid transparent;transition:transform .15s ease, filter .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--navy);color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:hover{filter:brightness(1.12)}
+  .btn-whatsapp{background:#25D366;color:#04270f}
+  .btn-whatsapp:hover{filter:brightness(1.06)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--border-strong)}
+  .btn-ghost:hover{border-color:var(--navy);color:var(--navy)}
+
+  .stat-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    margin-top:40px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  }
+  @media (max-width:640px){ .stat-row{grid-template-columns:repeat(2,1fr)} }
+  .stat{background:var(--surface);padding:16px 14px;text-align:center}
+  .stat .num{font-family:"IBM Plex Mono",monospace;font-size:1.5rem;font-weight:600;color:var(--navy);direction:ltr;display:block}
+  .stat .lbl{font-size:.78rem;color:var(--ink-faint);margin-top:4px}
+
+  /* avatar */
+  .avatar-card{
+    position:relative;justify-self:center;
+    width:min(320px,90%);aspect-ratio:1;border-radius:50%;
+    background:linear-gradient(155deg,var(--navy),var(--navy-deep));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow);
+    border:6px solid var(--surface);
+    outline:2px solid var(--border);
+  }
+  .avatar-card img.photo{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:50% 25%;
+    border-radius:50%;
+    z-index:1;
+  }
+  .avatar-card .initials{
+    font-family:"IBM Plex Sans Hebrew",sans-serif;color:#fff;font-weight:700;
+    font-size:clamp(3.4rem,9vw,5rem);direction:ltr;
+  }
+  .avatar-ring{
+    position:absolute;inset:-10px;border-radius:50%;
+    border:2px dashed color-mix(in srgb, var(--green) 55%, transparent);
+    animation:spin 40s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* never fully transparent — content stays legible even mid-animation or if a static render catches it before it finishes */
+  @keyframes fadeInUp{from{opacity:.45;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* hero entrance */
+  .hero-grid > div:first-child > *{animation:fadeInUp .5s ease both}
+  .hero-grid > div:first-child > *:nth-child(1){animation-delay:0s}
+  .hero-grid > div:first-child > *:nth-child(2){animation-delay:.06s}
+  .hero-grid > div:first-child > *:nth-child(3){animation-delay:.12s}
+  .hero-grid > div:first-child > *:nth-child(4){animation-delay:.18s}
+  .hero-grid > div:first-child > *:nth-child(5){animation-delay:.24s}
+  .hero-grid > div:first-child > *:nth-child(6){animation-delay:.3s}
+  .avatar-card{animation:fadeInUp .5s ease .15s both}
+
+  /* card hover lift */
+  .skill-card,.side-card,.edu-card{transition:transform .25s ease, box-shadow .25s ease}
+  .skill-card:hover,.side-card:hover,.edu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .stat{transition:transform .2s ease}
+  .stat:hover{transform:translateY(-3px)}
+  .chip{transition:transform .15s ease, background-color .15s ease}
+  .chip:hover{transform:translateY(-2px)}
+  .tl-item::before{transition:transform .2s ease}
+  .tl-item:hover::before{transform:scale(1.15)}
+  .avatar-badge{
+    position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+    background:var(--surface);border:1px solid var(--border);border-radius:999px;
+    padding:8px 16px;font-size:.8rem;font-weight:600;white-space:nowrap;
+    box-shadow:var(--shadow);
+    z-index:2;
+  }
+
+  /* ---------- sections ---------- */
+  section{padding-block:clamp(44px,6vw,72px)}
+  .section-head{max-width:62ch;margin-bottom:36px}
+  .section-head .eyebrow{margin-bottom:12px}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700}
+  .section-head p{color:var(--ink-soft);margin-top:10px}
+
+  .band{background:var(--surface-alt);border-block:1px solid var(--border)}
+
+  /* about checklist */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr} }
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  .checklist li{display:flex;gap:12px;align-items:flex-start;font-size:.98rem;color:var(--ink)}
+  .checklist .tick{
+    flex:none;width:22px;height:22px;border-radius:6px;background:var(--green-tint);
+    color:var(--green-deep);display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;font-weight:700;margin-top:2px;
+  }
+
+  .side-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    padding:22px;box-shadow:var(--shadow);
+  }
+  .side-card h3{font-size:1rem;margin-bottom:12px}
+  .lang-row{display:flex;justify-content:space-between;font-size:.92rem;padding-block:8px;border-top:1px solid var(--border)}
+  .lang-row:first-of-type{border-top:none}
+  .lang-row span:last-child{color:var(--ink-faint);font-family:"IBM Plex Mono",monospace;font-size:.8rem;direction:ltr}
+
+  .offscreen-card{margin-top:22px;overflow:hidden;padding:0}
+  .offscreen-card img{width:100%;height:170px;object-fit:cover}
+  .offscreen-card .cap{padding:16px 18px}
+  .offscreen-card .cap .k{
+    font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--green-deep);display:block;margin-bottom:6px;
+  }
+  .offscreen-card .cap p{margin:0;font-size:.88rem;color:var(--ink-soft)}
+
+  /* timeline */
+  .timeline{position:relative;padding-inline-end:2px}
+  .timeline::before{
+    content:"";position:absolute;top:6px;bottom:6px;inset-inline-end:9px;width:2px;
+    background:linear-gradient(to bottom, var(--navy), transparent);
+  }
+  .tl-item{position:relative;padding-inline-end:38px;padding-bottom:34px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;top:6px;inset-inline-end:0;width:20px;height:20px;
+    border-radius:50%;background:var(--surface);border:3px solid var(--navy);
+  }
+  .tl-item.current::before{background:var(--green);border-color:var(--green-deep)}
+  .tl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+  .tl-head .role{font-weight:700;font-size:1.05rem}
+  .tl-head .org{color:var(--navy);font-weight:600}
+  .tl-when{
+    font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--ink-faint);
+    direction:ltr;white-space:nowrap;
+  }
+  .tl-item p{margin:8px 0 0;color:var(--ink-soft);font-size:.94rem;max-width:68ch}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .tag{
+    font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--navy);
+    background:var(--navy-tint);border:1px solid color-mix(in srgb, var(--navy) 25%, transparent);
+    padding:4px 10px;border-radius:6px;direction:ltr;
+  }
+
+  /* skills */
+  .skill-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media (max-width:700px){ .skill-groups{grid-template-columns:1fr} }
+  .skill-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}
+  .skill-card h3{font-size:.95rem;color:var(--ink-soft);font-weight:600;margin-bottom:14px}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;padding:6px 12px;border-radius:8px;
+    background:var(--surface-alt);border:1px solid var(--border);color:var(--ink);direction:ltr;
+  }
+  .chip.top{background:var(--green-tint);border-color:color-mix(in srgb, var(--green) 40%, transparent);color:var(--green-deep);font-weight:600}
+
+  /* college */
+  .college-card{
+    display:grid;grid-template-columns:.85fr 1.15fr;gap:0;
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);
+  }
+  @media (max-width:780px){ .college-card{grid-template-columns:1fr} }
+  .college-visual{
+    background:linear-gradient(155deg,var(--navy),var(--navy-deep));
+    display:flex;align-items:center;justify-content:center;padding:36px;
+  }
+  .college-visual img{width:100%;max-width:280px;border-radius:12px;background:#fff;padding:16px}
+  .college-body{padding:clamp(24px,3vw,40px)}
+  .college-body h3{font-size:1.3rem;margin-bottom:10px}
+  .college-body p{color:var(--ink-soft);margin:0 0 18px}
+  .college-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;
+    background:var(--green-tint);color:var(--green-deep);padding:6px 12px;border-radius:999px;
+  }
+  .pill::before{content:"✓"}
+
+  /* education */
+  .edu-card{
+    display:flex;gap:18px;align-items:flex-start;background:var(--surface);
+    border:1px solid var(--border);border-radius:14px;padding:22px;max-width:640px;
+  }
+  .edu-mark{
+    flex:none;width:46px;height:46px;border-radius:10px;background:var(--navy-tint);color:var(--navy);
+    display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-weight:700;
+  }
+  .edu-card + .edu-card{margin-top:16px}
+  .edu-card .deg{color:var(--ink-soft);margin-top:4px}
+  .edu-card .yr{font-family:"IBM Plex Mono",monospace;color:var(--ink-faint);font-size:.82rem;margin-top:6px;direction:ltr}
+
+  /* contact / footer */
+  footer{background:var(--navy-deep);color:#eef3f6;padding-block:clamp(40px,5vw,64px)}
+  footer .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px}
+  @media (max-width:760px){ footer .foot-grid{grid-template-columns:1fr} }
+  footer h3{color:#fff;font-size:1.4rem;margin-bottom:10px}
+  footer p.tag{color:#9fb3c4;max-width:44ch}
+  .foot-col h4{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#7fa0bd;margin-bottom:14px}
+  .foot-link{display:flex;align-items:center;gap:10px;color:#dfe9f0;text-decoration:none;padding-block:6px;font-size:.92rem}
+  .foot-link:hover{color:var(--green)}
+  .foot-link .mono{color:#9fb3c4;direction:ltr}
+  .foot-bottom{
+    margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
+    font-size:.8rem;color:#7fa0bd;
+  }
+
+  ::selection{background:var(--green);color:#0f1a08}
+  :focus-visible{outline:2px solid var(--green);outline-offset:2px}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=Heebo:wght@300;400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+</head>
+<body>
+
+<div dir="rtl" lang="he">
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="brand">
+      <span class="brand-mark">GM</span>
+      גל מטלון
+    </div>
+    <nav class="links">
+      <a href="#about">עליי</a>
+      <a href="#experience">ניסיון</a>
+      <a href="#skills">כישורים</a>
+      <a href="#college">המכללה</a>
+      <a href="#education">השכלה</a>
+    </nav>
+    <a class="nav-cta" href="#contact">בואו נדבר</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">QA Manager · Automation Expert · Mentor</span>
+        <h1>גל מטלון</h1>
+        <div class="role">מייסד המכללה לאוטומציה<span class="sep">·</span>20+ שנות ניסיון בבניית וניהול צוותי QA ואוטומציה בהייטק</div>
+        <p class="lede">
+          מומחה בדיקות תוכנה ואוטומציה עם ניסיון הנדסי מוכח בבניית תשתיות אוטומציה, שילוב כלי AI כמו Claude Code בעבודת הבדיקות והפיתוח,
+          ניהול צוותי QA בחברות הייטק מובילות, והובלת תהליכי גיוס, הדרכה וייעוץ לאלפי אנשים שרוצים להיכנס לתחום או להתקדם בו.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-whatsapp" href="https://wa.me/972522702384" target="_blank" rel="noopener">
+            וואטסאפ · <span class="mono">052-270-2384</span>
+          </a>
+          <a class="btn btn-primary" href="tel:+972522702384">התקשרו עכשיו</a>
+          <a class="btn btn-ghost" href="mailto:gal@automation.co.il">שלחו מייל</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><span class="num">20+</span><span class="lbl">שנות ניסיון</span></div>
+          <div class="stat"><span class="num">1,712+</span><span class="lbl">בוגרים ותלמידים</span></div>
+          <div class="stat"><span class="num">7</span><span class="lbl">חברות הייטק שניהלתי בהן QA</span></div>
+          <div class="stat"><span class="num">5.0★</span><span class="lbl">דירוג גוגל</span></div>
+        </div>
+      </div>
+      <div class="avatar-card">
+        <div class="avatar-ring"></div>
+        <img class="photo" src="images/גל מטלון - קורסי בדיקות תוכנה לכניסה להייטק QA.jpg" alt="גל מטלון">
+        <span class="avatar-badge">מייסד · automation.co.il</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="band">
+    <div class="wrap about-grid">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">קצת עליי</span>
+          <h2>מניהול צוותי QA ועד הכשרת הדור הבא של אנשי האוטומציה</h2>
+        </div>
+        <ul class="checklist">
+          <li><span class="tick">✓</span>20+ שנות ניסיון בבניית וניהול צוותי QA בחברות קטנות עד בינוניות</li>
+          <li><span class="tick">✓</span>מומחיות ביישום מתודולוגיות QA, ובבנייה ואופטימיזציה של תהליכים</li>
+          <li><span class="tick">✓</span>מומחה אוטומציה עם Selenium WebDriver, TestNG ו-Java (POM design)</li>
+          <li><span class="tick">✓</span>ניסיון מעשי בבדיקת מערכות מורכבות: Client/Server, Web, Mobile</li>
+          <li><span class="tick">✓</span>רמת תכנות גבוהה ב-C#, JavaScript, HTML, jQuery, Bootstrap ועוד</li>
+          <li><span class="tick">✓</span>יכולת גבוהה בגיוס והדרכה של עובדים חדשים, וכישורים בין-אישיים מעולים</li>
+        </ul>
+      </div>
+      <div>
+        <div class="side-card">
+          <h3>שפות</h3>
+          <div class="lang-row"><span>עברית</span><span>NATIVE</span></div>
+          <div class="lang-row"><span>אנגלית</span><span>PROFESSIONAL</span></div>
+        </div>
+        <div class="side-card offscreen-card">
+          <img src="images/gal5.jpg" alt="גל מטלון בטיול בדיונות המדבר, לצד רכב שטח ומצלוח" loading="lazy">
+          <div class="cap">
+            <span class="k">מחוץ למסך</span>
+            <p>כשלא בונים תשתיות אוטומציה או מלמדים – אפשר למצוא אותי בין הדיונות, עם מצלוח וקצת חול בנעליים.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">ניסיון תעסוקתי</span>
+        <h2>מסלול הקריירה שלי</h2>
+        <p>מ-QA Team Leader ראשון ב-1998, דרך ניהול צוותי QA בחברות SaaS ומולטימדיה, ועד הקמת מכללה שהכשירה מעל 1,700 בוגרים.</p>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item current">
+          <div class="tl-head">
+            <span class="role">מייסד</span><span class="org">המכללה לאוטומציה</span>
+            <span class="tl-when">Mar 2017 – Present</span>
+          </div>
+          <p>קורסים בבדיקות תוכנה ואוטומציה עם ליווי אישי לכניסה להייטק, הכשרות מעבר לאוטומציה, הכשרות מתקדמות והדרכות לחברות הייטק, וליווי לאורך תהליך מציאת העבודה.</p>
+          <div class="tag-row"><span class="tag">Israel</span><span class="tag">Mentoring</span><span class="tag">Career Change</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="role">QA Team Leader</span><span class="org">Plataine</span>
+            <span class="tl-when">Aug 2015 – Mar 2018</span>
+          </div>
+          <p>בנייה, הובלה וניהול QA למספר מוצרים כולל SaaS, IIoT, Web ואפליקציית דסקטופ. קביעת תקני איכות ומתודולוגיות, ובניית מסגרות אוטומציה Hands-on.</p>
+          <div class="tag-row"><span class="tag">Selenium WebDriver</span><span class="tag">TestNG</span><span class="tag">Java (POM)</span><span class="tag">IIoT</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="role">מייסד</span><span class="org">informUp</span>
+            <span class="tl-when">Jan 2007 – Dec 2017</span>
+          </div>
+          <p>פתרון ALM לחברות קטנות-בינוניות: פשוט, ניתן להתאמה מלאה ובעלות נמוכה. שילוב ניהול דרישות, ניהול מקרי בדיקה, מעקב באגים וטיקטים בפתרון self-hosted.</p>
+          <div class="tag-row"><span class="tag">ALM</span><span class="tag">Test Case Mgmt</span><span class="tag">Bug Tracking</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="role">QA Manager</span><span class="org">YCD Multimedia</span>
+            <span class="tl-when">Mar 2008 – Dec 2014</span>
+          </div>
+          <p>ניהול QA וכן Support Tier 3, אחריות על סביבת פרודקשן SaaS, קביעת תהליכים ונהלים חוצי-ארגון, וכתיבת מסמכי STP/STD למערכות מורכבות.</p>
+          <div class="tag-row"><span class="tag">jMeter</span><span class="tag">Selenium</span><span class="tag">SaaS</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="role">QA Manager</span><span class="org">LivePerson</span>
+            <span class="tl-when">2006 – 2008</span>
+          </div>
+          <p>הטמעת מתודולוגיות Waterfall ו-Agile, וגידול צוות ה-QA מ-3 בודקים ל-15–20 בודקים ב-4 קבוצות.</p>
+          <div class="tag-row"><span class="tag">Agile</span><span class="tag">Team Scaling</span></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="role">QA Team Leader</span><span class="org">cVidya</span>
+            <span class="tl-when">2003 – 2006</span>
+          </div>
+          <p>הובלת צוות בדיקות והטמעת תהליכי איכות בחברת תוכנה ארגונית.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-head">
+            <span class="role">QA Team Leader + Configuration Manager</span><span class="org">BackWeb Technologies</span>
+            <span class="tl-when">1998 – 2000</span>
+          </div>
+          <p>תחילת הדרך המקצועית בעולמות ה-QA וניהול קונפיגורציה.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">כישורים וטכנולוגיות</span>
+        <h2>הכלים שאיתם אני עובד</h2>
+      </div>
+      <div class="skill-groups">
+        <div class="skill-card">
+          <h3>עבודה עם AI</h3>
+          <div class="chip-row">
+            <span class="chip top">Claude Code</span>
+            <span class="chip top">ChatGPT</span>
+            <span class="chip top">AI-Assisted Testing</span>
+            <span class="chip top">Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Top Skills (LinkedIn)</h3>
+          <div class="chip-row">
+            <span class="chip top">pytest</span>
+            <span class="chip top">ChatGPT</span>
+            <span class="chip top">Python</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>שפות ופיתוח</h3>
+          <div class="chip-row">
+            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">C#</span>
+            <span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">jQuery</span><span class="chip">Bootstrap</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>אוטומציה ובדיקות</h3>
+          <div class="chip-row">
+            <span class="chip">Selenium WebDriver</span><span class="chip">TestNG</span><span class="chip">JUnit</span>
+            <span class="chip">pytest</span><span class="chip">Maven</span><span class="chip">Gradle</span><span class="chip">jMeter</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>כלים ותהליכים</h3>
+          <div class="chip-row">
+            <span class="chip">Git</span><span class="chip">Jira</span><span class="chip">ALM</span>
+            <span class="chip">IIS</span><span class="chip">Apache</span><span class="chip">Test Case Mgmt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="college">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">המיזם שלי</span>
+        <h2>המכללה לאוטומציה</h2>
+      </div>
+      <div class="college-card">
+        <div class="college-visual">
+          <img src="images/logo.jpeg" alt="לוגו המכללה לאוטומציה">
+        </div>
+        <div class="college-body">
+          <h3>מלמד להיכנס להייטק — בשקיפות מלאה ועם ליווי אישי</h3>
+          <p>
+            רוצים להיכנס להייטק דרך בדיקות תוכנה ואוטומציה? כבר בבדיקות תוכנה ורוצים להתקדם לאוטומציה?
+            מתקשים למצוא עבודה בתחום? מאז 2017 ליוויתי מעל 1,712 בוגרים במסלולי QA ואוטומציה להיכנס לתחום,
+            להתקדם ולשדרג את עצמם — עם דירוג 5 כוכבים בגוגל.
+          </p>
+          <div class="college-pills">
+            <span class="pill">אמינות</span>
+            <span class="pill">מקצועיות</span>
+            <span class="pill">ליווי אישי</span>
+            <span class="pill">תוצאות מוכחות</span>
+          </div>
+          <a class="btn btn-primary" href="https://www.automation.co.il" target="_blank" rel="noopener">לאתר המכללה</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">השכלה</span>
+        <h2>רקע אקדמי וקורסים</h2>
+      </div>
+      <div class="edu-card">
+        <div class="edu-mark">BGU</div>
+        <div>
+          <div class="role" style="font-weight:700;font-size:1.05rem">אוניברסיטת בן-גוריון בנגב</div>
+          <div class="deg">B.Sc., מתמטיקה ומדעי המחשב</div>
+          <div class="yr">1995 – 1998</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-mark">AI</div>
+        <div>
+          <div class="role" style="font-weight:700;font-size:1.05rem">קורס AI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <h3>בואו נדבר</h3>
+      <p class="tag">מחפשים ללוות אתכם להייטק, או צריכים ייעוץ QA ואוטומציה לצוות שלכם? אני כאן.</p>
+      <div style="margin-top:22px" class="cta-row">
+        <a class="btn btn-whatsapp" href="https://wa.me/972522702384" target="_blank" rel="noopener">וואטסאפ</a>
+        <a class="btn btn-ghost" style="border-color:rgba(255,255,255,.35);color:#fff" href="mailto:gal@automation.co.il">מייל</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>יצירת קשר</h4>
+      <a class="foot-link" href="tel:+972522702384">📞 <span class="mono">052-270-2384</span></a>
+      <a class="foot-link" href="mailto:gal@automation.co.il">✉️ gal@automation.co.il</a>
+      <a class="foot-link" href="mailto:matalongal@gmail.com">✉️ matalongal@gmail.com</a>
+    </div>
+    <div class="foot-col">
+      <h4>קישורים</h4>
+      <a class="foot-link" href="https://www.automation.co.il" target="_blank" rel="noopener">🌐 automation.co.il</a>
+      <a class="foot-link" href="https://www.linkedin.com/in/gal-matalon" target="_blank" rel="noopener">🔗 LinkedIn</a>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>גל מטלון · QA & Automation</span>
+    <span>מייסד המכללה לאוטומציה · מאז 2017</span>
+  </div>
+</footer>
+
+</div>
+
+</body></html>

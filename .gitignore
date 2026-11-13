@@ -1,0 +1,26 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Allure test results and generated reports
+allure-results/
+allure-report/
+
+# Playwright MCP tool output (screenshots, page snapshots, console logs)
+.playwright-mcp/
+*.log
+
+# Local Claude Code settings (personal, not shared)
+.claude/settings.local.json
+
+# Personal files kept locally only
+my-profile/gal-matalon.pdf
+gal.txt
+gal-matalon.txt
+
+# OS files
+Thumbs.db
+desktop.ini
