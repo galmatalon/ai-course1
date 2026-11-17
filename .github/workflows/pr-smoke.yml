@@ -1,0 +1,51 @@
+name: PR smoke check
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    # This job name is the status check that must pass before merging to main
+    name: Smoke tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        shell: bash
+        working-directory: automation
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      # A small sample of tests: negative login (locked-out user) and the
+      # standard-user flow (login, add to cart, checkout, logout).
+      # pytest.ini uses --headed, so run under xvfb.
+      - name: Run smoke tests
+        shell: bash
+        working-directory: automation
+        run: |
+          source .venv/bin/activate
+          xvfb-run pytest --slowmo 0 \
+            tests/test_login_locked_user.py \
+            tests/test_logout.py
+
+      - name: Upload Allure results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: automation/allure-results
